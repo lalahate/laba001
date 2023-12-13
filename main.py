@@ -1,21 +1,11 @@
-import uvicorn
-from fastapi import FastAPI
-from fastapi.responses import HTMLResponse
+from fastapi import FastAPI, Response, Path, Query, Body, Header
+from fastapi.responses import HTMLResponse, PlainTextResponse, JSONResponse, FileResponse
+from public.users import users_router
+
 app = FastAPI()
+app.include_router(users_router)
 
 
-@app.get("/")
-async def p_index():
-    return {"FIO": "Жерносенко Елизавета Александровна"}
-
-
-@app.get("/users",response_class=HTMLResponse)
-async def p_users():
-    output ="<h3> Номер: 89628023376 </h3>"
-    return output
-
-@app.get("/tools",response_class=HTMLResponse)
-async def p_tools():
-    output = "<h2> <center> Artist </center></h2>"
-    return output
-
+@app.get('/', response_class=HTMLResponse)
+def p_index():
+    return "<b> task2 FastAPI </b>"
